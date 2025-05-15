@@ -4,4 +4,16 @@ jobs:
     check:
         runs-on: ubuntu-latest
         steps:
-            - run: echo hello world
+            - uses: actions/checkout@v4
+    setup:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/setup-java@v4
+              with:
+                distribution : 'temurin'
+                java-version: '17'
+                architecture: x64
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - run: mvn --batch-mode --update-snapshots verify
